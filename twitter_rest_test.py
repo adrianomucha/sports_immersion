@@ -9,8 +9,8 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
-user = api.get_user('MichaelPhelps')
+user = api.get_user('jonvoight')
 
-public_tweets = api.home_timeline(user)
+public_tweets = api.get_status(user)
 for tweet in public_tweets:
     print(tweet.text)
