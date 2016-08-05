@@ -1,16 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for
+from pymongo import MongoClient
 
-# create the application object
 app = Flask(__name__)
+client = MongoClient()
+user_logins = client.user_database.user_logins
 
-# use decorators to link the function to a url
+# # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    username = request.form.get('username')
+    password = request.form.get('password')
     error = None
+    print('__TEST_____')
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
+        # if username != 'test' or password != 'test':
+        #     error = 'Invalid Credentials. Please try again.'
+        # else:
+            print(username, password)
+            print(type(username), type(password))
+
+            print(user_logins.insert_one({username: password}))
+            print(user_logins.find_one({username: password}))
+            print(user_logins.find_one({}))
             return redirect(url_for('welcome'))
     return render_template('login.html', error=error)
 
