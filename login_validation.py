@@ -24,11 +24,11 @@ def login():
             print(type(user_logins.find_one({username: password})))
             print('Welcome to the site!')
             return redirect(url_for('welcome'))
-    return render_template('login.html', error=error)
+    return render_template('index.html', error=error)
 
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html')  # render a template
+    return render_template('register_user.html')  # render a template
 
 #adding users
 @app.route('/add_user', methods=['GET', 'POST'])
