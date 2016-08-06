@@ -8,6 +8,7 @@ user_logins = client.user_database.user_logins
 # # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    '''Tests to see if username is in database. If not found, returns None'''
     username = request.form.get('username')
     password = request.form.get('password')
     error = None
