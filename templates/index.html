@@ -61,6 +61,18 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                    <li>
+                  <form action="" method="post">
+                  <input type="text" placeholder="Username" name="username" value="{{
+            request.form.username }}" style="color:black">
+                  <input type="password" placeholder="Password" name="password" value="{{
+            request.form.password }}" style="color:black">
+                  <input class="btn btn-default" type="submit" value="Login">
+                    </form>
+                  {% if error %}
+                     <p class="error"><strong>Error:</strong> {{ error }}
+                  {% endif %}
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -203,7 +215,7 @@
                   <input class="btn btn-default" type="submit" value="Login">
                     </form>
                 </div>
-            </div>
+             </div>
         </div>
     </section>
     <section id="contact">
