@@ -1,10 +1,14 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+from passlib.hash import sha256_crypt
 
 app = Flask(__name__)
 client = MongoClient()
 user_logins = client.user_database.user_logins
+encrypt = sha256_crypt.encrypt
+salt = 'taste_the_tear555'
+# create secret file to store actual salt
 
 # route for handling the login page logic
 @app.route('/frontpage', methods=['GET', 'POST'])
@@ -16,6 +20,7 @@ def login():
     print('outside first if statement')
     if request.method == 'POST':
         print('within if statement')
+        print(encrypt(password))
         print(username, password)
         if user_logins.find_one({username: password}) is None:
             print('within is NONE block')

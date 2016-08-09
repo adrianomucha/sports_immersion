@@ -202,6 +202,9 @@
             request.form.password }}" style="color:black">
                   <input class="btn btn-default" type="submit" value="Login">
                     </form>
+                  {% if error %}
+                     <p class="error"><strong>Error:</strong> {{ error }}
+                  {% endif %}
                 </div>
             </div>
         </div>
