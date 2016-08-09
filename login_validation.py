@@ -13,14 +13,19 @@ def login():
     username = request.form.get('username')
     password = request.form.get('password')
     error = None
-    print('start of if statement')
+    print('outside first if statement')
     if request.method == 'POST':
-        print('this is the login cred')
+        print('within if statement')
+        print(username, password)
         if user_logins.find_one({username: password}) is None:
+            print('within is NONE block')
+            print('username, password')
+            print(username, password)
             print(user_logins.find_one({username: password}))
             print(type(user_logins.find_one({username: password})))
             error = 'Invalid Credentials. Please try again.'
         else:
+            print('within else block')
             print(user_logins.find_one({username: password}))
             print(type(user_logins.find_one({username: password})))
             print('Welcome to the site!')
