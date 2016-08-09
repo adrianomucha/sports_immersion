@@ -188,35 +188,20 @@
             </div>
         </div>
     </section>
-    <section class="bg-primary" id="register">
+    <section class="bg-primary">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Register Now!</h2>
                     <hr class="light">
                     <p class="text-faded">Join to our service and enjoy our new tool.</p>
-                    <div class="form-group row">
-                      <label for="" class="col-xs-2 col-form-label">Text</label>
-                      <div class="col-xs-10">
-                        <input class="form-control" type="text" value="" id="example-text-input">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="example-search-input" class="col-xs-2 col-form-label">Search</label>
-                      <div class="col-xs-10">
-                        <input class="form-control" type="search" value="" id="example-search-input">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
-                      <div class="col-xs-10">
-                        <input class="form-control" type="email" value="" id="example-email-input">
-                        </br>
-                      </div>
-                        </br>
-                     <a href="#register" class="page-scroll btn btn-default btn-xl sr-button">Register!</a>
-
-                    </div>
+                    <form action="" method="post">
+                  <input type="text" placeholder="Username" name="username" value="{{
+            request.form.username }}" style="color:black">
+                  <input type="password" placeholder="Password" name="password" value="{{
+            request.form.password }}" style="color:black">
+                  <input class="btn btn-default" type="submit" value="Login">
+                    </form>
                 </div>
             </div>
         </div>
