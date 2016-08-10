@@ -64,10 +64,10 @@
                     <li>
                   <form action="" method="post">
                   <input type="text" placeholder="Username" name="username" value="{{
-            request.form.username }}" style="color:black">
+            request.form.username }}" style="color:black; margin-top: 0.9em">
                   <input type="password" placeholder="Password" name="password" value="{{
-            request.form.password }}" style="color:black">
-                  <input class="btn btn-default" type="submit" value="Login">
+            request.form.password }}" style="color:black; margin-top: 0.9em">
+                  <input class="btn btn-default" type="submit" value="Login", style= "margin-top:1px">
                     </form>
                   {% if error %}
                      <p class="error"><strong>Error:</strong> {{ error }}
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="project-name">
                                     Brazil
-                                </div>
+                              </div>
                             </div>
                         </div>
                     </a>
@@ -207,12 +207,12 @@
                     <h2 class="section-heading">Register Now!</h2>
                     <hr class="light">
                     <p class="text-faded">Join to our service and enjoy our new tool.</p>
-                    <form action="" method="post">
+                    <form action="" method="post" style="margin-top: 10px">
                   <input type="text" placeholder="Username" name="username" value="{{
-            request.form.username }}" style="color:black">
+            request.form.username }}" style="color:black; width: 250px; height:40px">
                   <input type="password" placeholder="Password" name="password" value="{{
-            request.form.password }}" style="color:black">
-                  <input class="btn btn-default" type="submit" value="Login">
+            request.form.password }}" style="color:black; widht: 250px; height:40px">
+                  <input class="btn btn-default" type="submit" value="Register" style=" height: 40px; width: 100px; margin-left:20px">
                     </form>
                 </div>
              </div>
