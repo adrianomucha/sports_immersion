@@ -59,7 +59,7 @@ def login():
 
 @app.route('/welcome')
 def welcome():
-     return render_template('index.html')  # render a template
+     return render_template('profilepage.html')  # render a template
 
 # adding users
 @app.route('/frontpage', methods=['GET', 'POST'])
