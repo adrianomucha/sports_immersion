@@ -9,7 +9,7 @@ client = MongoClient()
 user_logins = client.user_database.user_logins
 
 
-class User(object):
+class User:
 
     def __init__(self, username, password):
         self.username = username
@@ -33,9 +33,6 @@ def login():
         #User exists, checking dict
         print('Text was entered into username')
         user_dict = user_logins.find_one({'Username': username})
-        stored_hash = user_dict['Password']
-        print(stored_hash)
-        user = User(username, password)
         print(user_dict)
         if user_dict is None:
             #return user object to conserve information
@@ -45,6 +42,9 @@ def login():
         else:
             # Check if password is right
             print('user exists, checking password')
+            stored_hash = user_dict['Password']
+            print(stored_hash)
+            user = User(username, password)
             if check_password_hash(stored_hash, password):
                 print('Password correct. Welcome to the site!')
                 return redirect(url_for('welcome'))
