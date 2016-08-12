@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+# from flask.ext.login import login_user, logout_user, UserMixin
 
 app = Flask(__name__)
 client = MongoClient()
@@ -21,15 +22,19 @@ class User:
     def check_password(self, password):
         return check_password_hash(self.pw_hash, password)
 
+@app.route('/')
+def home():
+     return render_template('index.html')  # render a template
+
 # route for handling the login page logic
-@app.route('/frontpage', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     '''Tests to see if username is in database. If not found, returns None'''
     username = request.form.get('username')
     password = request.form.get('password')
     error = None
     print('running login')
-    if username != None and request.method == 'POST':
+    if request.method == 'POST':
         #User exists, checking dict
         print('Text was entered into username')
         user_dict = user_logins.find_one({'Username': username})
@@ -52,9 +57,6 @@ def login():
                 print('incorrect password')
                 error = 'Password incorrect'
                 return render_template('index.html', error=error)
-    if username is None and request.method == 'POST':
-        print('redirect to register')
-        register()
     return render_template('index.html', error=error)
 
 @app.route('/welcome')
@@ -62,44 +64,31 @@ def welcome():
      return render_template('profilepage.html')  # render a template
 
 # adding users
-@app.route('/frontpage', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
     '''Tests to see if username is in database. If not found, returns None'''
+    print(request.form)
     error = None
-    print('running register')
-    if request.method == 'POST':
-        print('register: within if statement')
-        username = request.form.get('register_username')
-        password = request.form.get('register_password')
-        user_inst = User(username, password)
-        print('before test_user')
-        test_user = user_logins.find_one({'Username': username})
-        print('after test user')
-        print('credentials:')
-        print(username, password)
-        print(test_user)
-        if test_user is None:
-            #return user object to conserve information
-            print('within is NONE block, user does not exist')
-            print('username, password')
-            print(username, password)
-            user_logins.insert({
-                'Username': username,
-                'Password': user_inst.pw_hash
-            })
-            print('above hash')
-            print(user_inst.username)
-            print(user_inst.pw_hash)
-            print('below hash')
-            user_logins.insert_one({'Username': username})
-            error = 'User Added'
-            print(user_logins.find_one({'Username': username}))
-            print('user added to database')
-        else:
-            print('within else block')
-            print('User exists!')
-            error = 'Error: User exists'
-    return render_template('index.html', error=error)
+    username = request.form.get('register_username')
+    password = request.form.get('register_password')
+    user_inst = User(username, password)
+    test_user = user_logins.find_one({'Username': username})
+    if test_user is None:
+        #return user object to conserve information
+        print('within is NONE block, user does not exist')
+        user_logins.insert_one({
+            'Username': username,
+            'Password': user_inst.pw_hash
+        })
+        print(user_logins.find_one({'Username': username}))
+        error = 'User Added'
+        print('user added to database')
+        return render_template('index.html', error=error)
+    else:
+        print('User exists!')
+        error = 'Error: User exists'
+        return render_template('index.html', error=error)
+    return redirect(url_for('home'))
 
 #start the server with the 'run()' method
 if __name__ == '__main__':
